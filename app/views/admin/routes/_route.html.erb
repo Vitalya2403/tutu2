@@ -1,0 +1,9 @@
+<tr>
+  <td><%= route.title %></td>
+  <td><%= link_to t('common.show'), route %></td>
+  <td><%= link_to t('common.edit'), edit_route_path(route) %></td>
+  <td><%= link_to t('common.destroy'),
+                  route,
+                  method: :delete,
+                  data: { confirm: t('common.sure') } %></td>
+</tr>

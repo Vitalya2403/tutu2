@@ -1,0 +1,41 @@
+<p>
+  <strong><%= t('.railway_stations_route') %>:</strong>
+</p>
+
+<p>
+  <% if @route.railway_stations.empty? %>
+    <%= t('common.empty') %>
+  <% else %>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <td width="100">Название</td>
+      <td>Позиция</td>
+    </tr>
+    </thead>
+    <tbody>
+      <% @route.railway_stations.ordered.each do |station| %>
+        <tr>
+          <td><%= station.title %></td>
+          <td>
+            <%= form_tag update_position_railway_station_path(station), method: :patch, class: 'form-inline' do %>
+              <%= hidden_field_tag :route_id, @route.id %><br>
+              <table class="table table-bordered">
+                <tr>
+                  <!--<td><%= t('.position') %>:</td>-->
+                  <td><%= number_field_tag :position,
+                                           station.position_in(@route),
+                                           class: 'form-control'  %>
+                  <%= submit_tag "Изменить" %></td>
+
+                </tr>
+
+              </table>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end%>
+</p>
